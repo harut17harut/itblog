@@ -25,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/harut17harut/itblog/issues"
   },
-  "homepage": "https://github.com/harut17harut/itblog#readme"
+  "homepage": "https://github.com/harut17harut/itblog#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.10"
+  }
 }
