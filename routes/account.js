@@ -1,6 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
+var jwt = require('jsonwebtoken');
+const passport = require("passport");
+module.exports = router;
+const config = require("../config/db");
+
 // router.get("/reg",(req,res)=>{
 //     res.send("registration page");
 // });
@@ -18,10 +23,37 @@ User.addUser(newuser,(err,user)=>{
     res.json({success:true,msg:"youve registered succesfully"});
 });
 });
-router.get("/auth",(req,res)=>{
-    res.send("authoristion page");
+router.post("/auth",(req,res)=>{
+    const login = req.body.login;
+    const password = req.body.password;
+    User.getUserByLogin(login,(err,user)=>{
+        if(err) throw err;
+        if(!user)
+        return res.json({success:false,msg:"user not found"});
+     
+        User.comparePass(password,user.password,(err,ismatch)=>{
+            if(err) throw err;
+            if(ismatch){
+                const token = jst.sign(user,config.secret,{
+                    expiresIn:3600*24
+                });
+                res.json({
+                    success:true,
+                    token:'JWT' + token,
+                    user:{
+                        id:user._id,
+                        name:user.name,
+                        login:user.login,
+                        email:user.email
+
+                    }
+                })
+            }else{
+                return res.json({success:false,msg:"wrong password"});
+            }
+        });
+    });
 });
-router.get("/dashboard",(req,res)=>{
+router.get("/dashboard",passport.authenticate('jwt',{session:false}),(req,res)=>{
     res.send("dashboard page");
 });
-module.exports = router;

@@ -20,7 +20,7 @@ password:{
     required:true
 }
 });
-const User = mudule.exports = mongoose.model('User',UserSchema);
+const User = module.exports = mongoose.model('User',UserSchema);
 //get user by login
 module.exports.getUserByLogin = function(login,callback){
     const query = {login:login};
@@ -40,4 +40,10 @@ module.exports.addUser = function(newUser,callback){
     });
    
    
+};
+module.exports.comparePass = function(passfromuser,userDBPass,callback){
+bcrypt.compare(passFromUser,userDbPass,(err,ismatch)=>{
+if(err)throw err;
+callback(null,ismatch);
+});
 };
