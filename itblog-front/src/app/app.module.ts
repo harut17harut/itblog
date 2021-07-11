@@ -11,6 +11,10 @@ import { HomeComponent } from './home/home.component';
 import { RouterModule,Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
+import { FooterComponent } from './footer/footer.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FlashMessagesModule } from 'angular2-flash-messages';
+import { CheckformService } from './checkform.service';
 const appRoute: Routes  = [
   {path:'',component:HomeComponent},
   {path:'reg',component:RegComponent},
@@ -28,14 +32,17 @@ const appRoute: Routes  = [
     DashboardComponent,
     HomeComponent,
     AboutComponent,
-    ContactComponent
+    ContactComponent,
+    FooterComponent
   ],
   imports: [
     RouterModule.forRoot(appRoute),
     BrowserModule,
+    ReactiveFormsModule,
+    FlashMessagesModule.forRoot(),
     AppRoutingModule
   ],
-  providers: [],
+  providers: [CheckformService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
