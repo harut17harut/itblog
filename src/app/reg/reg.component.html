@@ -1,0 +1,24 @@
+<div class="container">
+    <flash-messages></flash-messages>
+<form [formGroup]="profileForm" (ngSubmit)="RegUser()">
+    
+      <label for="name">Your Name</label>
+      <input type="text" class="form-control" id="name" name="name" formControlName="name">
+     
+  
+        <label for="login">Your Login</label>
+        <input type="text" class="form-control" id="login" name="login" formControlName="login">
+        
+     
+        <label for="email">Your Email</label>
+        <input type="text" class="form-control" id="email" name="email" formControlName="email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+     
+     
+        <label for="password">Your Password</label>
+        <input type="password" class="form-control" id="password" name="password" formControlName="password">
+       
+    
+        <button type="submit" class="btn btn-success">Register</button>
+  </form>
+</div>
