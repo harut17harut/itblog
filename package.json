@@ -28,6 +28,6 @@
   },
   "homepage": "https://github.com/harut17harut/itblog#readme",
   "devDependencies": {
-    "nodemon": "^2.0.10"
+    "nodemon": "^2.0.12"
   }
 }

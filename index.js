@@ -6,14 +6,17 @@ const passport = require('passport');
 const path = require('path');
 const config = require("./config/db");
 const account = require('./routes/account');
+
 //connect to db
 mongoose.connect(config.db,{useNewUrlParser:true,useUnifiedTopology:true});
 mongoose.connection.on('connected',()=>{
     console.log("connection success");
 });
+
 mongoose.connection.on('error', (err)=>{
     console.log("connection failed: "  + err);
 });
+
 //connection end
 const app = express();
 app.use(passport.initialize());
