@@ -15,6 +15,9 @@ import { FooterComponent } from './footer/footer.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { CheckformService } from './checkform.service';
+import { AuthService } from './auth.service';
+import { HttpModule } from '@angular/http';
+
 const appRoute: Routes  = [
   {path:'',component:HomeComponent},
   {path:'reg',component:RegComponent},
@@ -36,13 +39,15 @@ const appRoute: Routes  = [
     FooterComponent
   ],
   imports: [
+
     RouterModule.forRoot(appRoute),
     BrowserModule,
     ReactiveFormsModule,
     FlashMessagesModule.forRoot(),
+    HttpModule,
     AppRoutingModule
   ],
-  providers: [CheckformService],
+  providers: [CheckformService,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

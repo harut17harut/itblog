@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { CheckformService } from '../checkform.service';
+import { AuthService } from '../auth.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { FlashMessage } from 'angular2-flash-messages/module/flash-message';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-reg',
   templateUrl: './reg.component.html',
@@ -16,6 +18,8 @@ email: new FormControl(''),
 password: new FormControl('')
   });
   constructor(private checkForm:CheckformService,
+    private router:Router,
+    private authService:AuthService,
      private flashMessages: FlashMessagesService){}
 RegUser(){
   var user = this.profileForm.value;
@@ -52,7 +56,25 @@ else if(!this.checkForm.checkPassword(user['password'])){
   console.log("please fill password field");
   return false;
 }else{
-  return false;
+
+
+  this.authService.registerUser(user).subscribe(data=>{
+    if(!data.success){
+      this.flashMessages.show(data.message,{
+        cssClass:"alert-danger",
+        timeout:4000
+      });
+      this.router.navigate(['/reg']);
+    }else{
+      this.flashMessages.show(data.message,{
+        cssClass:"alert-success",
+        timeout:4000
+      });
+      this.router.navigate(['/auth']);
+    }
+  });
+  return true;
 }
+
 }
 }

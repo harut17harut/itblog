@@ -16,7 +16,7 @@ var newUser = new User({
     login:req.body.login,
     password:req.body.password
 });
-User.addUser(newuser,(err,user)=>{
+User.addUser(newUser,(err,user)=>{
     if(err)
     res.json({success:false,msg:"user wasnt registered"});
     else
