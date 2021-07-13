@@ -25,8 +25,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get("*",(res,req)=>{
-res.sendFile(path.join(__dirname,"public/index.html"));
-});
+
 require('./config/passport')(passport);
 const port = process.env.PORT || 8080;
 
@@ -35,6 +34,8 @@ app.use(bodyParser.json());//for post requests
 
 //url listens
 app.use("/account",account);
+res.sendFile(path.join(__dirname,"public/index.html"));
+});
 app.use(express.static(path.join(__dirname + "public")));//connect server to public dir
 app.get("/",(req,res)=>{
     res.send("okay");
