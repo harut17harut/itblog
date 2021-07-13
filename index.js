@@ -20,13 +20,12 @@ mongoose.connection.on('error', (err)=>{
 //connection end
 const app = express();
 const port = process.env.PORT || 8080;
-
+// app.get('*',(req,res)=>{
+//     res.sendFile(path.join(__dirname,"/public/index.html"));
+// });
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get("*",(req,res)=>{
-    res.sendFile(path.join(__dirname,"public/index.html"));
-});
 require('./config/passport')(passport);
 
 
@@ -36,7 +35,7 @@ app.use(bodyParser.json());//for post requests
 //url listens
 app.use("/account",account);
 
-app.use(express.static(path.join(__dirname + "public")));//connect server to public dir
+app.use(express.static(__dirname + "/public"));//connect server to public dir
 app.get("/",(req,res)=>{
     res.send("okay");
 });
