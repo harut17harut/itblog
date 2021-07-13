@@ -22,7 +22,7 @@ const app = express();
 app.use(passport.initialize());
 app.use(passport.session());
 require('./config/passport')(passport);
-const port = 3000;
+const port = process.env.PORT || 8080;
 
 app.use(cors());//external links
 app.use(bodyParser.json());//for post requests
