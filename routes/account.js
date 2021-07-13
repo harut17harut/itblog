@@ -28,18 +28,19 @@ router.post("/auth",(req,res)=>{
     const password = req.body.password;
     User.getUserByLogin(login,(err,user)=>{
         if(err) throw err;
-        if(!user)
-        return res.json({success:false,msg:"user not found"});
-     
+        if(!user){
+            return res.json({success:false,msg:"user not found"});
+        } else{
         User.comparePass(password,user.password,(err,ismatch)=>{
             if(err) throw err;
             if(ismatch){
-                const token = jst.sign(user,config.secret,{
+                console.log("passwords are matching");
+                const token = jwt.sign(user.toJSON(),config.secret,{
                     expiresIn:3600*24
                 });
                 res.json({
                     success:true,
-                    token:'JWT' + token,
+                    token:'JWT ' + token,
                     user:{
                         id:user._id,
                         name:user.name,
@@ -47,11 +48,12 @@ router.post("/auth",(req,res)=>{
                         email:user.email
 
                     }
-                })
+                });
             }else{
                 return res.json({success:false,msg:"wrong password"});
             }
         });
+    }
     });
 });
 router.get("/dashboard",passport.authenticate('jwt',{session:false}),(req,res)=>{

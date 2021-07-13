@@ -41,8 +41,8 @@ module.exports.addUser = function(newUser,callback){
    
    
 };
-module.exports.comparePass = function(passfromuser,userDBPass,callback){
-bcrypt.compare(passFromUser,userDbPass,(err,ismatch)=>{
+module.exports.comparePass = function(password,userDBPass,callback){
+bcrypt.compare(password,userDBPass,(err,ismatch)=>{
 if(err)throw err;
 callback(null,ismatch);
 });

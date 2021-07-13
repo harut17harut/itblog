@@ -1,1 +1,12 @@
-<p>auth works!</p>
+<div class="container">
+    <flash-messages></flash-messages>
+<form [formGroup]="profileForm" (ngSubmit)="AuthUser()">
+        <label for="login">Your Login</label>
+        <input type="text" class="form-control" id="login" name="login" formControlName="login">
+        <label for="password">Your Password</label>
+        <input type="password" class="form-control" id="password" name="password" formControlName="password">
+       
+    
+        <button type="submit" class="btn btn-success">Sign in</button>
+  </form>
+</div>
