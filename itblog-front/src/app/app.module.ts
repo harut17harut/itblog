@@ -17,12 +17,12 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
 import { CheckformService } from './checkform.service';
 import { AuthService } from './auth.service';
 import { HttpModule } from '@angular/http';
-
+import { isLoggedIn } from './islogged.guard';
 const appRoute: Routes  = [
   {path:'',component:HomeComponent},
   {path:'reg',component:RegComponent},
   {path:'auth',component:AuthComponent},
-  {path:'dashboard',component:DashboardComponent},
+  {path:'dashboard',component:DashboardComponent,canActivate:[isLoggedIn]},
   {path:'about',component:AboutComponent},
   {path:'contact',component:ContactComponent},
 ];
@@ -47,7 +47,7 @@ const appRoute: Routes  = [
     HttpModule,
     AppRoutingModule
   ],
-  providers: [CheckformService,AuthService],
+  providers: [CheckformService,AuthService,isLoggedIn],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

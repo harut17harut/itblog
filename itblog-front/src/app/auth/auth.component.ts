@@ -27,7 +27,7 @@ AuthUser(){
 if(user["password"]==""){
     this.flashMessages.show("please fill password field",{
       cssClass:"alert-danger",
-      timeout:4000
+      timeOut:4000
     });
   }else{
     
@@ -41,12 +41,13 @@ if(!data.success){
   });
 }else{
   
+  
+  this.router.navigate(['dashboard']);
+  this.authservice.StoreUser(data.token,data.user);
   this.flashMessages.show("you sucesfully authorized",{
     cssClass:"alert-success",
     timeout:4000
   });
-  this.router.navigate(['dashboard']);
-  this.authservice.StoreUser(data.token,data.user);
 }
   });
 }

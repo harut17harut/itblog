@@ -15,8 +15,9 @@
           <a class="nav-link" [routerLink] = "['/contact']">Contact us</a>
         </li>
       </ul>
-      <a [routerLink] = "['/reg']" class="btn btn-primary">Register</a>
-      <a [routerLink] = "['/auth']" class="btn btn-primary">Login</a>
+      <a *ngIf="authService.isLoggedIn()" [routerLink] = "['/dashboard']" class="btn btn-warning">Dashboard</a>
+      <a *ngIf="!authService.isLoggedIn()" [routerLink] = "['/reg']" class="btn btn-primary">Register</a>
+      <a *ngIf="!authService.isLoggedIn()" [routerLink] = "['/auth']" class="btn btn-primary">Login</a>
 
     </div>
   </nav>
