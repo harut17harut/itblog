@@ -1,4 +1,4 @@
 module.exports = {
-    db:'mongodb://localhost:27017/itblog_db',
+    db:'mongodb+srv://itblog_admin:2000ogostos@itblog.t1ywf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
     secret:'secretkey'
 }
