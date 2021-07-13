@@ -19,8 +19,14 @@ mongoose.connection.on('error', (err)=>{
 
 //connection end
 const app = express();
+
+
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.get("*",(res,req)=>{
+res.sendFile(path.join(__dirname,"public/index.html"));
+});
 require('./config/passport')(passport);
 const port = process.env.PORT || 8080;
 
